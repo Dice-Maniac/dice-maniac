@@ -6,7 +6,8 @@ public class RollTest : MonoBehaviour
 {
 	[SerializeField] List<TextMeshProUGUI> texts;
 	[SerializeField] TextMeshProUGUI totalValue;
-	DiceRoll diceRoll;
+	public DiceRoll diceRoll;
+	public gamecontrol script;
 	private void Start()
 	{
 		diceRoll = new DiceRoll();
@@ -17,8 +18,12 @@ public class RollTest : MonoBehaviour
 	}
 	public void Roll()
 	{
-		diceRoll.Roll();
-		UpdateText();
+		if (script.rollLimit == 0)
+		{
+			diceRoll.Roll();
+			UpdateText();
+			script.rollLimit = 1;
+		}	
 	}
 	private void UpdateText()
 	{

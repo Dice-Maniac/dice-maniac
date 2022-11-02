@@ -10,9 +10,13 @@ public class gamecontrol : MonoBehaviour
     public GameObject player2;
     public CinemachineVirtualCamera vcam;
     private int term;
+    public int rollLimit;
+    public int moveLimit;
     void Start()
     {
         term = 0;
+        rollLimit = 0;
+        moveLimit = 0;
         player2.GetComponent<movescript>().enabled = false;
         vcam = vcam.GetComponent<CinemachineVirtualCamera>();
         vcam.m_Follow = player1.transform;
@@ -24,13 +28,17 @@ public class gamecontrol : MonoBehaviour
     {
         if (term == 0)
         {
+            rollLimit = 0;
+            moveLimit = 0;
             player1.GetComponent<movescript>().enabled = false;
             player2.GetComponent<movescript>().enabled = true;
             term = 1;
             vcam.m_Follow = player2.transform;
         }
         else
-        {
+        {   
+            rollLimit = 0;
+            moveLimit = 0;
             player2.GetComponent<movescript>().enabled = false;
             player1.GetComponent<movescript>().enabled = true;
             term = 0;

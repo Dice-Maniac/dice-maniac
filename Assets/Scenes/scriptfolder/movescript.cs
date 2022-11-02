@@ -18,7 +18,7 @@ public class movescript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (script.moveLimit >=0)
+        if (script.moveLimit !=0)
         {
             transform.position= Vector3.MoveTowards(transform.position,movePoint.position,moveSpeed* Time.deltaTime);
             if(Vector3.Distance(transform.position,movePoint.position)<=.05f){

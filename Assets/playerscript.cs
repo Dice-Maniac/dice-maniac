@@ -11,11 +11,11 @@ public class playerscript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        healthbar.SetColor(Color.green);
+        if(healthbar!=null) healthbar.SetColor(Color.green);
         health = 1f;
     }
     void reducehealth(int x) {
-        if (x == 1) {
+        if (x == 1&&healthbar!=null) {
             healthbar.SetSize(health - 0.25f);
             healthbar.SetColor(Color.red);
         }    

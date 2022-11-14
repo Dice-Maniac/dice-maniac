@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthBar: MonoBehaviour
 {
+    // the attribute of the bar
     public Transform bar;
 
     // size update function
@@ -11,7 +12,7 @@ public class HealthBar: MonoBehaviour
         bar.localScale = new Vector3(sizeNormalized, 1f);
     }
 
-    //color update function
+    //color update function (used when hit by skills)
     public void SetColor(Color color) {
         bar.Find("health").GetComponent<SpriteRenderer>().color = color;
     }

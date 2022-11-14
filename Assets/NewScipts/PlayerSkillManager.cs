@@ -15,7 +15,8 @@ public class PlayerSkillManager : MonoBehaviour
     private bool iscanskill1 = false;
 
 
-    public int NowPlayer;//(0) player1 (1)player2
+    //(0) represents player1; (1) represents player2
+    public int NowPlayer;
     [HideInInspector]
     public PlayerHealth targetplayer;
     [HideInInspector]
@@ -24,7 +25,10 @@ public class PlayerSkillManager : MonoBehaviour
     public GameObject Player1;
     [HideInInspector]
     public GameObject Player2;
+
+    // this is firball prefabe
     private GameObject skill1prefabe;
+
     private void Awake()
     {
         Instance = this;
@@ -34,7 +38,7 @@ public class PlayerSkillManager : MonoBehaviour
 
         gamecrol = GameObject.Find("gamecontrol").GetComponent<gamecontrol>();
         targetplayer = Player1.GetComponent<PlayerHealth>();
-        //load prefabes
+        //load prefabe
         skill1prefabe = Resources.Load<GameObject>("fireball");
 
         //button onclick
@@ -44,6 +48,7 @@ public class PlayerSkillManager : MonoBehaviour
 
     private void Update()
     {
+        // check when skill is ready to use or not
         if (Input.GetMouseButtonDown(0)&&iscanskill1)
         {
             iscanskill1 = false;
@@ -53,9 +58,10 @@ public class PlayerSkillManager : MonoBehaviour
             Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
             Vector3 targetpos = mousePosInWorld;
 
+            // check for which player should use the fire ball and which player should take damage
             if (NowPlayer ==0)
             {
-
+                // use skill and used the angle of the mouse position to fire the fireball
                 GameObject go = Instantiate(skill1prefabe, Player1.transform.position, Quaternion.identity);
                 go.GetComponent<skill1prefabe>().SetTrans(new Vector3(targetpos.x,targetpos.y,1));
                 go.GetComponent<skill1prefabe>().targetplayerid = 1;
@@ -89,7 +95,6 @@ public class PlayerSkillManager : MonoBehaviour
         if (NowPlayer==1)
         {
             Player2.GetComponent<Playerskill>().Releaseskill3();
-
         }
     }
 

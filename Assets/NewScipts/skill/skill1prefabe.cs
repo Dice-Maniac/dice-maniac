@@ -16,7 +16,8 @@ public class skill1prefabe : MonoBehaviour
     }
 
     public void SetTrans(Vector3 targetvector3)
-    {     
+    {   
+        // set the angle of the fireball
         transform.right= targetvector3 - transform.position;
     }
 
@@ -27,6 +28,7 @@ public class skill1prefabe : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // assign damage when skill has collision with player
         if (collision.tag=="Player")
         {
             if (PlayerSkillManager.Instance.targetplayer==collision.GetComponent<PlayerHealth>())

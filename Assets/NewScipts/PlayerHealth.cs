@@ -5,23 +5,26 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float HP;//生命值
-    private float MaxHP;//最大生命值
+    // Player's health point
+    public float HP;
+    private float MaxHP;
     public Image hpima;
 
     private void Start()
     {
+        // Initial players' HP at start of the game
         MaxHP = HP;
     }
 
     private void Update()
     {
 
-        //实时更新血量Ui条
+        // Update player's HpP
         hpima.fillAmount = HP / MaxHP;
 
     }
 
+    // Function when player gets damage
     public void TakeDamage(float damage)
     {
         if (HP <= 0) return;

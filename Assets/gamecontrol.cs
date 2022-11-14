@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-
+//The gamecontrol function including end turn function, camera control, and recording turn
 public class gamecontrol : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Two players 
     public GameObject player1;
     public GameObject player2;
+    //camera of player
     public CinemachineVirtualCamera vcam;
     private int term;
+    //limit of roll and moving 
     public int rollLimit;
     public int moveLimit;
+    //Game start condition, everything is set to zero
     void Start()
     {
         term = 0;
@@ -22,15 +25,17 @@ public class gamecontrol : MonoBehaviour
         vcam.m_Follow = player1.transform;
 
     }
-
+    //get turn
     public int Getterm()
     {
         return term;
     }
+    //end turn and swtich player and switch the camera
     public void changeplayer()
     {
         if (term == 0)
         {
+            //reset the limit, switch to another player
             rollLimit = 0;
             moveLimit = 0;
             player1.GetComponent<movescript>().enabled = false;
@@ -55,9 +60,5 @@ public class gamecontrol : MonoBehaviour
             PlayerSkillManager.Instance.NowPlayer = 0;
             PlayerSkillManager.Instance.targetplayer = player2.GetComponent<PlayerHealth>();
         }
-
-
-
-
     }
 }

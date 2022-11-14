@@ -10,7 +10,7 @@ public class GetDice4 : MonoBehaviour
     public GameObject Image2;
     public GameObject Image3;
     public GameObject Image4;
-    // Update is called once per frame
+    // Select the point of dice 3 as move point (update the moveLimit)
     public void UpdateMovePoints4()
     {
         script2.moveLimit = script.diceRoll.dice[3].rollValue;

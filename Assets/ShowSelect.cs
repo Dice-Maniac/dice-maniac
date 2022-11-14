@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Show the selection button when chosing a dice action is needed
 public class ShowSelect : MonoBehaviour
 {
     public GameObject Image;

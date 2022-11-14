@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //the playing scene has index of 1. jump to the playing scene when click the button
     public void Play(){
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadScene(1);
     }
-
+    //quit the game when clicking button 'quit'
     public void Quit(){
         Application.Quit();
     }

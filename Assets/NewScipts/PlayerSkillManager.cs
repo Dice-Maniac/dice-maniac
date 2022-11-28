@@ -12,7 +12,10 @@ public class PlayerSkillManager : MonoBehaviour
     public Button skill1;
     public Button skill2;
     public Button skill3;
+ 
     private bool iscanskill1 = false;
+    private bool iscanskill2 = false;
+ 
 
 
     //(0) represents player1; (1) represents player2
@@ -28,6 +31,10 @@ public class PlayerSkillManager : MonoBehaviour
 
     // this is firball prefabe
     private GameObject skill1prefabe;
+    private GameObject skill2prefabe;
+
+
+    
 
     private void Awake()
     {
@@ -40,11 +47,15 @@ public class PlayerSkillManager : MonoBehaviour
         targetplayer = Player1.GetComponent<PlayerHealth>();
         //load prefabe
         skill1prefabe = Resources.Load<GameObject>("fireball");
-
+        skill2prefabe = Resources.Load<GameObject>("fireball2");
         //button onclick
         skill1.onClick.AddListener(skill1btnclick);
+        skill2.onClick.AddListener(skill2btnclick);
         skill3.onClick.AddListener(skill3btnclick);
+    
     }
+
+   
 
     private void Update()
     {
@@ -72,13 +83,31 @@ public class PlayerSkillManager : MonoBehaviour
                 go.GetComponent<skill1prefabe>().SetTrans(new Vector3(targetpos.x, targetpos.y, 1));
                 go.GetComponent<skill1prefabe>().targetplayerid = 0;
             }
+        }else  if (Input.GetMouseButtonDown(0)&&iscanskill2)
+        {
+            iscanskill2 = false;
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 mousePosOnScreen = Input.mousePosition;
+            mousePosOnScreen.z = screenPos.z;
+            Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);
+            Vector3 targetpos = mousePosInWorld;
 
+            // check for which player should use the fire ball and which player should take damage
+            if (NowPlayer ==0)
+            {
+                // use skill and used the angle of the mouse position to fire the fireball
+                GameObject go = Instantiate(skill2prefabe, Player1.transform.position, Quaternion.identity);
+                go.GetComponent<skill1prefabe>().SetTrans(new Vector3(targetpos.x,targetpos.y,1));
+                go.GetComponent<skill1prefabe>().targetplayerid = 1;
+            }
+            else
+            {
+                GameObject go = Instantiate(skill2prefabe, Player2.transform.position, Quaternion.identity);
+                go.GetComponent<skill1prefabe>().SetTrans(new Vector3(targetpos.x, targetpos.y, 1));
+                go.GetComponent<skill1prefabe>().targetplayerid = 0;
+            }
         }
-
-   
-
     }
-
 
     public void skill1btnclick()
     {
@@ -87,7 +116,7 @@ public class PlayerSkillManager : MonoBehaviour
 
     public void skill2btnclick()
     {
-
+    iscanskill2 = true;
 
     }
     public void skill3btnclick()
@@ -95,8 +124,9 @@ public class PlayerSkillManager : MonoBehaviour
         if (NowPlayer==1)
         {
             Player2.GetComponent<Playerskill>().Releaseskill3();
+        }else 
+        {
+         Player1.GetComponent<Playerskill>().Releaseskill3();
         }
     }
-
-
 }

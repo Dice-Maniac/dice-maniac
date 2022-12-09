@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Playerskill : MonoBehaviour
 {
-
+    public GameObject objDun;
     // check for status whether player can release skill or not
     public bool canrelease = true;
 
@@ -12,18 +12,21 @@ public class Playerskill : MonoBehaviour
     public float Damage = 10;
     public float AtkDis = 2;
 
+
+
     // get the hammer animator component
     public Animator weaponAnima;
 
     private void Start()
     {
-        weaponAnima = transform.GetChild(4).GetComponent<Animator>();
     }
 
     public void Releaseskill3()
     {
+        objDun.SetActive(true);
         weaponAnima.gameObject.SetActive(true);
         weaponAnima.SetTrigger("atk");
+        gameObject.GetComponent<PlayerHealth>().SetHPColor();
         StartCoroutine(TakeDamage());
 
     }
@@ -38,7 +41,7 @@ public class Playerskill : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         weaponAnima.gameObject.SetActive(false);
-
+         objDun.SetActive(false);
     }
 
 }

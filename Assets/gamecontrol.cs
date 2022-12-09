@@ -15,6 +15,9 @@ public class gamecontrol : MonoBehaviour
     public int rollLimit;
     public int moveLimit;
     //Game start condition, everything is set to zero
+
+
+
     void Start()
     {
         term = 0;
